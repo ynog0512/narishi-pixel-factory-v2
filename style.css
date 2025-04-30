@@ -1,0 +1,66 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fdf6f0;
+  text-align: center;
+  padding: 2rem;
+  color: #333;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #f48fb1;
+}
+
+.ui-area {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 1rem;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  width: 250px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 2;
+  position: relative;
+}
+
+button {
+  background-color: #b39ddb;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 2;
+  position: relative;
+  margin: 0 5px;
+}
+
+button:hover {
+  background-color: #9575cd;
+}
+
+#outputArea {
+  border: 2px dashed #ccc;
+  width: 1024px;
+  height: 1024px;
+  margin: 0 auto;
+  background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+canvas {
+  image-rendering: pixelated;
+  border: 1px solid #ccc;
+  display: block;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}

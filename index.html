@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>NARIO PIXEL FACTORY</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>NARIO PIXEL FACTORY</h1>
+
+  <div class="ui-area">
+    <input type="text" id="promptInput" placeholder="※入力内容は現在使用されません">
+    <button onclick="generatePixelArt()">PIXELをつくる</button>
+    <button onclick="downloadImage()">PNGをダウンロード</button>
+  </div>
+
+  <div id="outputArea">
+    <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
