@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>NARIO PIXEL FACTORY</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>なりお専用ピクセルファクトリー</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>NARIO PIXEL FACTORY</h1>
+  <h1>PIXEL FACTORY</h1>
 
-  <div class="ui-area">
-    <input type="text" id="promptInput" placeholder="※入力内容は現在使用されません">
+  <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
+
+  <div class="buttons">
     <button onclick="generatePixelArt()">PIXELをつくる</button>
     <button onclick="downloadImage()">PNGをダウンロード</button>
   </div>
 
-  <div id="outputArea">
-    <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
-  </div>
+  <p>📌 画像を長押しして保存してください</p>
+  <img id="previewImage" style="display:none; margin-top: 1rem; max-width: 100%; border: 2px dashed #aaa; border-radius: 8px;" alt="生成された画像を長押しで保存してください">
 
   <script src="script.js"></script>
 </body>
