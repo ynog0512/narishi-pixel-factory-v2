@@ -1,6 +1,6 @@
 function getRandomPart(folder, maxCount) {
   const randomIndex = Math.floor(Math.random() * maxCount) + 1;
-  return `assets/${folder}/${folder}${randomIndex}.png`;
+  return `/assets/${folder}/${folder}${randomIndex}.png`;
 }
 
 function generatePixelArt() {
@@ -8,7 +8,6 @@ function generatePixelArt() {
   const ctx = canvas.getContext("2d");
 
   const imageSize = 1024;
-
   ctx.clearRect(0, 0, imageSize, imageSize);
 
   const body = new Image();
