@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>なりお専用ピクセルファクトリー</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>なりし専用ピクセルファクトリー</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>PIXEL FACTORY</h1>
 
-  <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
+  <div id="canvasContainer">
+    <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
+  </div>
 
-  <div class="buttons">
+  <div class="button-group">
     <button onclick="generatePixelArt()">PIXELをつくる</button>
     <button onclick="downloadImage()">PNGをダウンロード</button>
   </div>
 
-  <p>📌 画像を長押しして保存してください</p>
-  <img id="previewImage" style="display:none; margin-top: 1rem; max-width: 100%; border: 2px dashed #aaa; border-radius: 8px;" alt="生成された画像を長押しで保存してください">
+  <p class="note">※画像を長押しで保存できます</p>
+
+  <img id="previewImage" style="display:none; width: 300px; margin-top: 20px;" />
 
   <script src="script.js"></script>
 </body>
