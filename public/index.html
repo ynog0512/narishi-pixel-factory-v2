@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>なりし専用ピクセルファクトリー</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- 🔽 ここからPWA対応追記 -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#a78bfa" />
+  <link rel="apple-touch-icon" href="assets/icon/icon192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- 🔼 ここまでPWA対応追記 -->
 </head>
 <body>
   <h1>PIXEL FACTORY</h1>
 
-<div id="canvasContainer">
-  <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
-</div>
-
+  <div id="canvasContainer">
+    <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
+  </div>
 
   <div class="button-group">
     <button onclick="generatePixelArt()">PIXELをつくる</button>

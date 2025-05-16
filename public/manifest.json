@@ -1,0 +1,20 @@
+{
+  "name": "なりしのピクセルファクトリー",
+  "short_name": "ピクセルファーム",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fef7f3",
+  "theme_color": "#a78bfa",
+  "icons": [
+    {
+      "src": "/assets/icon/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icon/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
