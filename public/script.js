@@ -16,7 +16,7 @@ function generatePixelArt() {
   const head = new Image();
   const eye = new Image();
 
-  body.src = getRandomPart("body", 47);
+  body.src = getRandomPart("body", 48);
   head.src = getRandomPart("head", 24);
   eye.src = getRandomPart("eye", 8);
 
