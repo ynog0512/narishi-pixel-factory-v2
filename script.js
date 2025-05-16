@@ -1,6 +1,6 @@
 function getRandomPart(folder, maxCount) {
   const randomIndex = Math.floor(Math.random() * maxCount) + 1;
-  return `public/assets/${folder}/${folder}${randomIndex}.png`;
+  return `assets/${folder}/${folder}${randomIndex}.png`;
 }
 
 function generatePixelArt() {
