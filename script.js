@@ -10,9 +10,10 @@ function generatePixelArt() {
   const headImg = new Image();
   const eyeImg = new Image();
 
-  bodyImg.src = `assets/body/body${bodyIndex}.png`;
-  headImg.src = `assets/head/head${headIndex}.png`;
-  eyeImg.src = `assets/eye/eye${eyeIndex}.png`;
+  // ✅ ここがポイント：先頭に `/` をつける（public 直下と認識させる）
+  bodyImg.src = `/assets/body/body${bodyIndex}.png`;
+  headImg.src = `/assets/head/head${headIndex}.png`;
+  eyeImg.src = `/assets/eye/eye${eyeIndex}.png`;
 
   Promise.all([
     loadImage(bodyImg),
