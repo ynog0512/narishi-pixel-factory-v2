@@ -1,6 +1,8 @@
 function getRandomPart(folder, maxCount) {
   const randomIndex = Math.floor(Math.random() * maxCount) + 1;
-  return `/assets/${folder}/${folder}${randomIndex}.png`;
+  const path = `/assets/${folder}/${folder}${randomIndex}.png`;
+  console.log(`[LOAD] ${folder}: ${path}`);
+  return path;
 }
 
 function generatePixelArt() {
@@ -19,6 +21,7 @@ function generatePixelArt() {
   eye.src = getRandomPart("eye", 8);
 
   let loaded = 0;
+
   const onLoad = () => {
     loaded++;
     if (loaded === 3) {
@@ -32,9 +35,17 @@ function generatePixelArt() {
     }
   };
 
+  const onError = (type, path) => {
+    console.error(`[ERROR] Failed to load ${type}: ${path}`);
+  };
+
   body.onload = onLoad;
   head.onload = onLoad;
   eye.onload = onLoad;
+
+  body.onerror = () => onError("body", body.src);
+  head.onerror = () => onError("head", head.src);
+  eye.onerror = () => onError("eye", eye.src);
 }
 
 function downloadImage() {
