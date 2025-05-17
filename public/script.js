@@ -10,8 +10,8 @@ function generatePixelArt() {
   const ctx = canvas.getContext("2d");
 
   const canvasSize = 1080;
-  const margin = 100; // ✅ 四辺の余白
-  const drawSize = canvasSize - margin * 2; // 880px
+  const margin = 135; // ✅ 余白135px
+  const drawSize = canvasSize - margin * 2; // 810px
 
   canvas.width = canvasSize;
   canvas.height = canvasSize;
@@ -33,7 +33,7 @@ function generatePixelArt() {
   const onLoad = () => {
     loaded++;
     if (loaded === 3) {
-      // ✅ 中央にパーツ描画（880×880）
+      // ✅ 中央にパーツ描画（810×810）
       ctx.drawImage(body, margin, margin, drawSize, drawSize);
       ctx.drawImage(head, margin, margin, drawSize, drawSize);
       ctx.drawImage(eye, margin, margin, drawSize, drawSize);
