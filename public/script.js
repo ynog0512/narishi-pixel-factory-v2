@@ -12,6 +12,10 @@ function generatePixelArt() {
   const imageSize = 1024;
   ctx.clearRect(0, 0, imageSize, imageSize);
 
+  // ✅ 背景塗り（すっきりグレー）
+  ctx.fillStyle = "#f0f0f0";
+  ctx.fillRect(0, 0, imageSize, imageSize);
+
   const body = new Image();
   const head = new Image();
   const eye = new Image();
@@ -30,7 +34,7 @@ function generatePixelArt() {
       ctx.drawImage(eye, 0, 0, imageSize, imageSize);
 
       const img = document.getElementById("previewImage");
-      img.src = canvas.toDataURL("image/png");
+      img.src = canvas.toDataURL("image/jpeg", 0.92); // JPEG形式
       img.style.display = "block";
     }
   };
@@ -58,7 +62,7 @@ function downloadImage() {
     .padStart(2, "0")}_${today
     .getDate()
     .toString()
-    .padStart(2, "0")}.png`;
+    .padStart(2, "0")}.jpg`; // ✅ 拡張子変更
 
   link.href = img.src;
   link.download = filename;
