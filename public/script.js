@@ -10,12 +10,14 @@ function generatePixelArt() {
   const ctx = canvas.getContext("2d");
 
   const canvasSize = 1080;
-  const margin = 100; // ✅ 余白を100pxに変更
+  const margin = 75;
   const drawSize = canvasSize - margin * 2;
 
+  // サイズをセット（HTML上でもサイズ固定してるならここも重要）
   canvas.width = canvasSize;
   canvas.height = canvasSize;
 
+  // ✅ 背景塗り（すっきりグレー）
   ctx.fillStyle = "#f0f0f0";
   ctx.fillRect(0, 0, canvasSize, canvasSize);
 
@@ -32,7 +34,7 @@ function generatePixelArt() {
   const onLoad = () => {
     loaded++;
     if (loaded === 3) {
-      // ✅ 描画エリア：880×880 中央配置
+      // ✅ 中央に描画（余白75px）
       ctx.drawImage(body, margin, margin, drawSize, drawSize);
       ctx.drawImage(head, margin, margin, drawSize, drawSize);
       ctx.drawImage(eye, margin, margin, drawSize, drawSize);
@@ -42,10 +44,6 @@ function generatePixelArt() {
       img.style.display = "block";
     }
   };
-
-  // ...（省略）
-}
-
 
   const onError = (type, path) => {
     console.error(`[ERROR] Failed to load ${type}: ${path}`);
