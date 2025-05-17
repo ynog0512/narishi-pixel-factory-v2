@@ -9,12 +9,17 @@ function generatePixelArt() {
   const canvas = document.getElementById("pixelCanvas");
   const ctx = canvas.getContext("2d");
 
-  const imageSize = 1024;
-  ctx.clearRect(0, 0, imageSize, imageSize);
+  const canvasSize = 1080;
+  const margin = 75;
+  const drawSize = canvasSize - margin * 2;
+
+  // サイズをセット（HTML上でもサイズ固定してるならここも重要）
+  canvas.width = canvasSize;
+  canvas.height = canvasSize;
 
   // ✅ 背景塗り（すっきりグレー）
   ctx.fillStyle = "#f0f0f0";
-  ctx.fillRect(0, 0, imageSize, imageSize);
+  ctx.fillRect(0, 0, canvasSize, canvasSize);
 
   const body = new Image();
   const head = new Image();
@@ -29,12 +34,13 @@ function generatePixelArt() {
   const onLoad = () => {
     loaded++;
     if (loaded === 3) {
-      ctx.drawImage(body, 0, 0, imageSize, imageSize);
-      ctx.drawImage(head, 0, 0, imageSize, imageSize);
-      ctx.drawImage(eye, 0, 0, imageSize, imageSize);
+      // ✅ 中央に描画（余白75px）
+      ctx.drawImage(body, margin, margin, drawSize, drawSize);
+      ctx.drawImage(head, margin, margin, drawSize, drawSize);
+      ctx.drawImage(eye, margin, margin, drawSize, drawSize);
 
       const img = document.getElementById("previewImage");
-      img.src = canvas.toDataURL("image/jpeg", 0.92); // JPEG形式
+      img.src = canvas.toDataURL("image/jpeg", 0.92);
       img.style.display = "block";
     }
   };
@@ -62,7 +68,7 @@ function downloadImage() {
     .padStart(2, "0")}_${today
     .getDate()
     .toString()
-    .padStart(2, "0")}.jpg`; // ✅ 拡張子変更
+    .padStart(2, "0")}.jpg`;
 
   link.href = img.src;
   link.download = filename;
