@@ -96,3 +96,4 @@ function copyPostText() {
     alert("Instagram投稿用のテキストをコピーしました！\n\n画像を長押しして保存してください。");
   });
 }
+ x
