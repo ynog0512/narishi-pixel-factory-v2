@@ -27,8 +27,8 @@ function generatePixelArt() {
   const ctx = canvas.getContext("2d");
 
   const canvasSize = 1080;
-  const margin = 200; 
-  const drawSize = canvasSize - margin * 2; 
+  const margin = 200;
+  const drawSize = canvasSize - margin * 2;
 
   canvas.width = canvasSize;
   canvas.height = canvasSize;
@@ -51,7 +51,7 @@ function generatePixelArt() {
   document.getElementById("characterName").textContent = `Name: ${name}`;
   document.getElementById("generatedDate").textContent = `Date: ${today}`;
   document.getElementById("serialNumber").textContent = `Serial: ${serial}`;
-  document.getElementById("hashtagBlock").textContent = `#🍅今日のピクセル野菜🍅  #ちょこっと農業 #ちょこ農 #ピクセルファーム #しもつけ市の野菜 #ピクセル野菜 #NFT農園`;
+  document.getElementById("hashtagBlock").textContent = `#🍅今日のピクセル野菜🍅  #ちょこっと農業 #ちょこ農 #ピクセルファーム #しもつけ市の野菜 #ピクセル野菜 #NFT農園  #pixelart #8bit #cutepixelart #nftart #digitalcollectible #indiecreator`;
 
   let loaded = 0;
 
