@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>マイピクセル野菜図鑑</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>マイピクセル野菜図鑑</h1>
+
+  <div class="button-group">
+    <a href="index.html">← 戻る</a>
+    <button onclick="clearZukan()">図鑑をリセット</button>
+  </div>
+
+  <div id="zukanContainer" class="zukan-wrapper"></div>
+
+  <script>
+    function loadZukan() {
+      const container = document.getElementById("zukanContainer");
+      const zukan = JSON.parse(localStorage.getItem("pixelZukan") || "[]");
+
+      if (zukan.length === 0) {
+        container.innerHTML = "<p>まだ保存されたピクセル野菜はありません。</p>";
+        return;
+      }
+
+      zukan.forEach(entry => {
+        const card = document.createElement("div");
+        card.className = "zukan-card";
+
+        const img = document.createElement("img");
+        img.src = entry.image;
+        img.alt = entry.name;
+
+        const info = document.createElement("div");
+        info.innerHTML = `<strong>${entry.name}</strong><br>${entry.date}<br>${entry.serial}`;
+
+        card.appendChild(img);
+        card.appendChild(info);
+        container.appendChild(card);
+      });
+    }
+
+    function clearZukan() {
+      if (confirm("図鑑をリセットしますか？この操作は取り消せません。")) {
+        localStorage.removeItem("pixelZukan");
+        location.reload();
+      }
+    }
+
+    window.onload = loadZukan;
+  </script>
+</body>
+</html>
