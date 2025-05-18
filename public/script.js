@@ -19,7 +19,6 @@ function getTodayDateStr() {
 }
 
 function getSerialForToday() {
-  // 日ごとに固定。現在は単純に「#0001」で統一。
   return "#0001";
 }
 
@@ -49,7 +48,6 @@ function generatePixelArt() {
   const today = getTodayDateStr();
   const serial = getSerialForToday();
 
-  // 表示要素に反映
   document.getElementById("characterName").textContent = `Name: ${name}`;
   document.getElementById("generatedDate").textContent = `Date: ${today}`;
   document.getElementById("serialNumber").textContent = `Serial: ${serial}`;
@@ -83,22 +81,7 @@ function generatePixelArt() {
   eye.onerror = () => onError("eye", eye.src);
 }
 
-function downloadImage() {
-  const img = document.getElementById("previewImage");
-  const link = document.createElement("a");
-
-  const today = new Date();
-  const filename = `${today.getFullYear()}_${(today.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}_${today
-    .getDate()
-    .toString()
-    .padStart(2, "0")}.jpg`;
-
-  link.href = img.src;
-  link.download = filename;
-  link.click();
-
+function copyPostText() {
   const name = document.getElementById("characterName").textContent;
   const date = document.getElementById("generatedDate").textContent;
   const serial = document.getElementById("serialNumber").textContent;
