@@ -27,8 +27,8 @@ function generatePixelArt() {
   const ctx = canvas.getContext("2d");
 
   const canvasSize = 1080;
-  const margin = 135;
-  const drawSize = canvasSize - margin * 2;
+  const margin = 200; 
+  const drawSize = canvasSize - margin * 2; 
 
   canvas.width = canvasSize;
   canvas.height = canvasSize;
