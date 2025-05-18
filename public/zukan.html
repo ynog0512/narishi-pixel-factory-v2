@@ -11,8 +11,8 @@
 
   <div class="button-group">
     <a href="index.html">← 戻る</a>
-    <button onclick="clearZukan()">図鑑をリセット</button>
   </div>
+  
 
   <div id="zukanContainer" class="zukan-wrapper"></div>
 
@@ -43,12 +43,6 @@
       });
     }
 
-    function clearZukan() {
-      if (confirm("図鑑をリセットしますか？この操作は取り消せません。")) {
-        localStorage.removeItem("pixelZukan");
-        location.reload();
-      }
-    }
 
     window.onload = loadZukan;
   </script>
