@@ -17,19 +17,22 @@
   <h1>今日のピクセル野菜</h1>
 
   <div id="canvasContainer">
-    <canvas id="pixelCanvas" width="1024" height="1024"></canvas>
+    <!-- ✅ サイズを script.js に合わせて 1080×1080 に -->
+    <canvas id="pixelCanvas" width="1080" height="1080"></canvas>
   </div>
 
   <div class="button-group">
     <button onclick="generatePixelArt()">ピクセル野菜を収穫する</button>
-    <button onclick="downloadImage()">PNGをダウンロード</button>
+    <button onclick="downloadImage()">画像をダウンロード</button>
   </div>
 
-  <p class="note">
-    ※画像を長押しで保存できます<br />
-    🍅今日のピクセル野菜🍅<br />
-    #ちょい農 #ピクセルファーム #しもつけ市の野菜
-  </p>
+  <!-- ✅ 生成情報を表示するブロック -->
+  <div id="infoBox">
+    <p id="characterName" class="info-text"></p>
+    <p id="generatedDate" class="info-text"></p>
+    <p id="serialNumber" class="info-text"></p>
+    <p id="hashtagBlock" class="note"></p>
+  </div>
 
   <img id="previewImage" style="display:none; width: 300px; margin-top: 20px;" />
 

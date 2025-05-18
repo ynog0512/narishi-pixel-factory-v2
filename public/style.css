@@ -68,3 +68,11 @@ canvas {
   border-radius: 8px;
   border: 1px dashed #bbb;
 }
+
+/* 🔽 キャラ名・日付・シリアル用の追加スタイル */
+.info-text {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 4px;
+  font-weight: bold;
+}
