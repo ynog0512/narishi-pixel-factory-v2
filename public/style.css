@@ -115,3 +115,18 @@ canvas {
   color: #444;
   line-height: 1.4;
 }
+.zukan-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #a78bfa;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.zukan-button:hover {
+  background-color: #8b5cf6;
+}
