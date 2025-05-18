@@ -18,8 +18,11 @@ function getTodayDateStr() {
   return `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 }
 
-function getSerialForToday() {
-  return "#0001";
+function getSerialNumber() {
+  const key = "globalSerialCount";
+  const current = parseInt(localStorage.getItem(key) || "0", 10) + 1;
+  localStorage.setItem(key, current);
+  return `#${current.toString().padStart(4, "0")}`;
 }
 
 function generatePixelArt() {
@@ -46,12 +49,13 @@ function generatePixelArt() {
 
   const name = getRandomName();
   const today = getTodayDateStr();
-  const serial = getSerialForToday();
+  const serial = getSerialNumber();
 
   document.getElementById("characterName").textContent = `Name: ${name}`;
   document.getElementById("generatedDate").textContent = `Date: ${today}`;
   document.getElementById("serialNumber").textContent = `Serial: ${serial}`;
-  document.getElementById("hashtagBlock").textContent = `#🍅今日のピクセル野菜🍅  #ちょこっと農業 #ちょこ農 #ピクセルファーム #しもつけ市の野菜 #ピクセル野菜 #NFT農園  #pixelart #8bit #cutepixelart #nftart #digitalcollectible #indiecreator`;
+  document.getElementById("hashtagBlock").textContent =
+    `#🍅今日のピクセル野菜🍅  #ちょこっと農業 #ちょこ農 #ピクセルファーム #しもつけ市の野菜 #ピクセル野菜 #NFT農園  #pixelart #8bit #cutepixelart #nftart #digitalcollectible #indiecreator`;
 
   let loaded = 0;
 
