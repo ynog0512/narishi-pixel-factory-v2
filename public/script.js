@@ -69,6 +69,17 @@ function generatePixelArt() {
       const img = document.getElementById("previewImage");
       img.src = canvas.toDataURL("image/jpeg", 0.92);
       img.style.display = "block";
+
+      // 保存処理：図鑑に追加
+      const entry = {
+        image: img.src,
+        name: name,
+        date: today,
+        serial: serial
+      };
+      const zukan = JSON.parse(localStorage.getItem("pixelZukan") || "[]");
+      zukan.unshift(entry);
+      localStorage.setItem("pixelZukan", JSON.stringify(zukan));
     }
   };
 
@@ -96,4 +107,32 @@ function copyPostText() {
     alert("Instagram投稿用のテキストをコピーしました！\n\n画像を長押しして保存してください。");
   });
 }
- x
+
+function showZukan() {
+  const container = document.getElementById("zukanContainer");
+  container.innerHTML = "";
+
+  const zukan = JSON.parse(localStorage.getItem("pixelZukan") || "[]");
+  if (zukan.length === 0) {
+    container.innerHTML = "<p>まだ保存されたピクセル野菜はありません。</p>";
+    return;
+  }
+
+  zukan.forEach(entry => {
+    const card = document.createElement("div");
+    card.className = "zukan-card";
+
+    const img = document.createElement("img");
+    img.src = entry.image;
+    img.alt = entry.name;
+
+    const info = document.createElement("div");
+    info.innerHTML = `<strong>${entry.name}</strong><br>${entry.date}<br>${entry.serial}`;
+
+    card.appendChild(img);
+    card.appendChild(info);
+    container.appendChild(card);
+  });
+
+  container.style.display = "block";
+}
