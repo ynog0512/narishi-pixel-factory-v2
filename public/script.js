@@ -3,14 +3,55 @@ function getRandomPart(folder, maxCount) {
   return `/assets/${folder}/${folder}${randomIndex}.png`;
 }
 
-const names = [
-  "Sunny", "Blaze", "Leafy", "Sprout", "Moss", "Flare", "Berry",
-  "Nugget", "Pickle", "Rye", "Zest", "Ash", "Vega", "Luna", "Clover",
-  "Wisp", "Nova", "Juno", "Flick", "Pebble"
+const prefixes = [
+  "Pix", "Glo", "Zor", "Lun", "Nib", "Fla", "Veg", "To", "Yum", "Chi",
+  "Wib", "Bri", "Dro", "Kra", "Plu", "Vee", "Twi", "Pum", "Fiz", "Jel",
+  "Mop", "Zin", "Cly", "Grim", "Hob", "Nop", "Vib", "Roo", "Dus", "Shy",
+  "Quo", "Blep", "Woz", "Gax", "Tru", "Kip", "Wug", "Xel", "Jom", "Frip",
+  "Vaz", "Lom", "Cud", "Paz", "Bli", "Nom", "Skiv", "Yoz", "Flam", "Snor",
+  "Brik", "Wub", "Kloo", "Zep", "Voop", "Crap", "Zil", "Hoz", "Daz", "Muz",
+  "Ska", "Joop", "Thum", "Vro", "Wam", "Zog", "Taz", "Flep", "Norb", "Crim",
+  "Ruk", "Snib", "Vlim", "Brum", "Zlex", "Krob", "Wag", "Plek", "Rib", "Jeb",
+  "Zam", "Plib", "Mok", "Fro", "Dux", "Zreb", "Klem", "Jik", "Grep", "Trob",
+  "Lurk", "Spaz", "Dop", "Frug", "Grix", "Narb", "Shib", "Wizz", "Morb", "Kluk"
+];
+
+const suffixes = [
+  "bit", "boo", "zy", "leaf", "ella", "pop", "doon", "tchi", "ko", "sta",
+  "nug", "meek", "droo", "za", "puff", "na", "quin", "zyx", "po", "loo",
+  "ble", "nik", "bun", "tek", "zon", "trop", "waff", "moo", "gob", "rip",
+  "zak", "jeb", "sket", "vub", "nok", "kib", "zum", "clop", "thud", "plop",
+  "flip", "dunk", "rizz", "bam", "swoop", "muzz", "kip", "chub", "drax", "frup",
+  "bazz", "snub", "whoo", "zunk", "yoop", "cham", "vish", "flok", "blin", "wuzz",
+  "skid", "wham", "kran", "vex", "mip", "doodle", "groob", "plink", "tosh", "wog",
+  "nib", "zimp", "zook", "chik", "morb", "shig", "gloop", "drit", "bip", "slub",
+  "snok", "jum", "chonk", "grim", "poff", "glim", "brum", "twib", "spok", "frizz",
+  "woof", "snap", "drim", "jop", "blik", "zrum", "thip", "krem", "crub", "shup"
 ];
 
 function getRandomName() {
-  return names[Math.floor(Math.random() * names.length)];
+  const used = JSON.parse(localStorage.getItem("usedNames") || "[]");
+  const maxCombinations = prefixes.length * suffixes.length;
+
+  if (used.length >= maxCombinations) {
+    return "NoMoreNames";
+  }
+
+  let name;
+  let tries = 0;
+  do {
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+    name = prefix + suffix;
+    tries++;
+    if (tries > 1000) {
+      return "NoMoreNames";
+    }
+  } while (used.includes(name));
+
+  used.push(name);
+  localStorage.setItem("usedNames", JSON.stringify(used));
+  return name;
 }
 
 function getTodayDateStr() {
@@ -70,7 +111,6 @@ function generatePixelArt() {
       img.src = canvas.toDataURL("image/jpeg", 0.92);
       img.style.display = "block";
 
-      // 保存処理：図鑑に追加
       const entry = {
         image: img.src,
         name: name,
@@ -106,33 +146,4 @@ function copyPostText() {
   navigator.clipboard.writeText(templateText).then(() => {
     alert("Instagram投稿用のテキストをコピーしました！\n\n画像を長押しして保存してください。");
   });
-}
-
-function showZukan() {
-  const container = document.getElementById("zukanContainer");
-  container.innerHTML = "";
-
-  const zukan = JSON.parse(localStorage.getItem("pixelZukan") || "[]");
-  if (zukan.length === 0) {
-    container.innerHTML = "<p>まだ保存されたピクセル野菜はありません。</p>";
-    return;
-  }
-
-  zukan.forEach(entry => {
-    const card = document.createElement("div");
-    card.className = "zukan-card";
-
-    const img = document.createElement("img");
-    img.src = entry.image;
-    img.alt = entry.name;
-
-    const info = document.createElement("div");
-    info.innerHTML = `<strong>${entry.name}</strong><br>${entry.date}<br>${entry.serial}`;
-
-    card.appendChild(img);
-    card.appendChild(info);
-    container.appendChild(card);
-  });
-
-  container.style.display = "block";
 }
