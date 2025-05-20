@@ -1,5 +1,28 @@
-const prefixes = [...Array(100)].map((_, i) => `Pre${i + 1}`);
-const suffixes = [...Array(100)].map((_, i) => `Suf${i + 1}`);
+// プレフィックス・サフィックス：造語風100種ずつ
+const prefixes = [
+  "Zog", "Ble", "Rib", "Tru", "Cud", "Nog", "Plix", "Frub", "Snar", "Jib",
+  "Brum", "Glim", "Wob", "Dro", "Trop", "Vib", "Flim", "Drub", "Glop", "Nek",
+  "Spro", "Zub", "Klim", "Grib", "Vrop", "Snub", "Wlim", "Nop", "Crub", "Jub",
+  "Grop", "Twib", "Thrum", "Plob", "Krop", "Frop", "Brib", "Swob", "Grum", "Clip",
+  "Blub", "Snib", "Plum", "Trob", "Grob", "Drob", "Flub", "Nub", "Zlim", "Twop",
+  "Vlim", "Jrip", "Slom", "Crip", "Thob", "Wrop", "Zrip", "Klom", "Blob", "Frim",
+  "Grib", "Zrom", "Blam", "Twim", "Snim", "Plip", "Dlim", "Grup", "Wlob", "Brup",
+  "Crob", "Klim", "Jlob", "Slap", "Zlap", "Drap", "Flip", "Gram", "Trop", "Brab",
+  "Krom", "Drim", "Twob", "Flam", "Slub", "Jram", "Snom", "Blip", "Drop", "Gnub",
+  "Trom", "Frab", "Srob", "Grib", "Zlim", "Snup", "Wram", "Vrom", "Clop", "Drup"
+];
+const suffixes = [
+  "waff", "plin", "jub", "lim", "dop", "bop", "vix", "chub", "gleb", "nix",
+  "leaf", "snup", "gron", "wink", "trum", "nob", "twix", "flop", "drip", "flim",
+  "snib", "grop", "kram", "nub", "slim", "blop", "clop", "drop", "bram", "grim",
+  "shup", "trip", "vlep", "plub", "snok", "grib", "zlim", "twop", "frub", "grok",
+  "splop", "cram", "krom", "blik", "zrup", "pran", "smog", "jib", "drek", "klip",
+  "swib", "wrop", "vram", "plug", "plam", "blob", "slop", "knob", "sprok", "blim",
+  "trig", "drob", "slim", "crup", "klub", "frap", "twug", "vlim", "zub", "snig",
+  "flab", "grim", "knap", "zlip", "frin", "drap", "vub", "brip", "nrop", "klam",
+  "drop", "snup", "grob", "zrop", "nlim", "grup", "trom", "smab", "clip", "wram",
+  "gnum", "drup", "plop", "slub", "brab", "fron", "trub", "snob", "klob", "blob"
+];
 
 function getRandomName() {
   const used = JSON.parse(localStorage.getItem("usedNames") || "[]");
@@ -85,11 +108,11 @@ function generatePixelArt() {
   document.getElementById("characterName").textContent = `Name: ${name}`;
   document.getElementById("generatedDate").textContent = `Date: ${today}`;
   document.getElementById("serialNumber").textContent = `Serial: ${serial}`;
+  document.getElementById("characterType").textContent = `type / ${type}`;
   document.getElementById("hashtagBlock").textContent =
     `#🍅今日のピクセル野菜🍅  #ちょこっと農業 #ちょこ農 #ピクセルファーム #しもつけ市の野菜 #ピクセル野菜 #NFT農園  #pixelart #8bit #cutepixelart #nftart #digitalcollectible #indiecreator`;
 
   let loaded = 0;
-
   const onLoad = () => {
     loaded++;
     if (loaded === 3) {
@@ -101,7 +124,6 @@ function generatePixelArt() {
       img.src = canvas.toDataURL("image/jpeg", 0.92);
       img.style.display = "block";
 
-      // 図鑑に保存
       const zukan = JSON.parse(localStorage.getItem("pixelZukan") || "[]");
       zukan.push({
         name,
@@ -122,10 +144,11 @@ function generatePixelArt() {
 function copyPostText() {
   const name = document.getElementById("characterName").textContent;
   const date = document.getElementById("generatedDate").textContent;
+  const type = document.getElementById("characterType").textContent;
   const serial = document.getElementById("serialNumber").textContent;
   const tags = document.getElementById("hashtagBlock").textContent;
 
-  const templateText = `${name}\n${date}\n${serial}\n${tags}`;
+  const templateText = `${name}\n${date}\n${type}\n${serial}\n${tags}`;
   navigator.clipboard.writeText(templateText).then(() => {
     alert("Instagram投稿用のテキストをコピーしました！\n\n画像を長押しして保存してください。");
   });
