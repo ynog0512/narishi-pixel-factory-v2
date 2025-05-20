@@ -1,41 +1,11 @@
-function getRandomPart(folder, maxCount) {
-  const randomIndex = Math.floor(Math.random() * maxCount) + 1;
-  return `/assets/${folder}/${folder}${randomIndex}.png`;
-}
-
-const prefixes = [
-  "Pix", "Glo", "Zor", "Lun", "Nib", "Fla", "Veg", "To", "Yum", "Chi",
-  "Wib", "Bri", "Dro", "Kra", "Plu", "Vee", "Twi", "Pum", "Fiz", "Jel",
-  "Mop", "Zin", "Cly", "Grim", "Hob", "Nop", "Vib", "Roo", "Dus", "Shy",
-  "Quo", "Blep", "Woz", "Gax", "Tru", "Kip", "Wug", "Xel", "Jom", "Frip",
-  "Vaz", "Lom", "Cud", "Paz", "Bli", "Nom", "Skiv", "Yoz", "Flam", "Snor",
-  "Brik", "Wub", "Kloo", "Zep", "Voop", "Crap", "Zil", "Hoz", "Daz", "Muz",
-  "Ska", "Joop", "Thum", "Vro", "Wam", "Zog", "Taz", "Flep", "Norb", "Crim",
-  "Ruk", "Snib", "Vlim", "Brum", "Zlex", "Krob", "Wag", "Plek", "Rib", "Jeb",
-  "Zam", "Plib", "Mok", "Fro", "Dux", "Zreb", "Klem", "Jik", "Grep", "Trob",
-  "Lurk", "Spaz", "Dop", "Frug", "Grix", "Narb", "Shib", "Wizz", "Morb", "Kluk"
-];
-
-const suffixes = [
-  "bit", "boo", "zy", "leaf", "ella", "pop", "doon", "tchi", "ko", "sta",
-  "nug", "meek", "droo", "za", "puff", "na", "quin", "zyx", "po", "loo",
-  "ble", "nik", "bun", "tek", "zon", "trop", "waff", "moo", "gob", "rip",
-  "zak", "jeb", "sket", "vub", "nok", "kib", "zum", "clop", "thud", "plop",
-  "flip", "dunk", "rizz", "bam", "swoop", "muzz", "kip", "chub", "drax", "frup",
-  "bazz", "snub", "whoo", "zunk", "yoop", "cham", "vish", "flok", "blin", "wuzz",
-  "skid", "wham", "kran", "vex", "mip", "doodle", "groob", "plink", "tosh", "wog",
-  "nib", "zimp", "zook", "chik", "morb", "shig", "gloop", "drit", "bip", "slub",
-  "snok", "jum", "chonk", "grim", "poff", "glim", "brum", "twib", "spok", "frizz",
-  "woof", "snap", "drim", "jop", "blik", "zrum", "thip", "krem", "crub", "shup"
-];
+const prefixes = [...Array(100)].map((_, i) => `Pre${i + 1}`);
+const suffixes = [...Array(100)].map((_, i) => `Suf${i + 1}`);
 
 function getRandomName() {
   const used = JSON.parse(localStorage.getItem("usedNames") || "[]");
-  const maxCombinations = prefixes.length * suffixes.length;
+  const max = prefixes.length * suffixes.length;
 
-  if (used.length >= maxCombinations) {
-    return "NoMoreNames";
-  }
+  if (used.length >= max) return "NoMoreNames";
 
   let name;
   let tries = 0;
@@ -44,9 +14,7 @@ function getRandomName() {
     const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
     name = prefix + suffix;
     tries++;
-    if (tries > 1000) {
-      return "NoMoreNames";
-    }
+    if (tries > 1000) break;
   } while (used.includes(name));
 
   used.push(name);
@@ -66,6 +34,24 @@ function getSerialNumber() {
   return `#${current.toString().padStart(4, "0")}`;
 }
 
+function getTypeFromBodyNumber(n) {
+  if (n >= 1 && n <= 17) return "tomato";
+  if (n >= 18 && n <= 34) return "eggplant";
+  if (n >= 35 && n <= 56) return "green pepper";
+  if (n >= 57 && n <= 76) return "kanpyo";
+  if (n >= 77 && n <= 94) return "carrot";
+  if (n >= 95 && n <= 110) return "pumpkin";
+  return "unknown";
+}
+
+function getRandomPartNumber(maxCount) {
+  return Math.floor(Math.random() * maxCount) + 1;
+}
+
+function getPartPath(folder, number) {
+  return `/assets/${folder}/${folder}${number}.png`;
+}
+
 function generatePixelArt() {
   const canvas = document.getElementById("pixelCanvas");
   const ctx = canvas.getContext("2d");
@@ -76,21 +62,25 @@ function generatePixelArt() {
 
   canvas.width = canvasSize;
   canvas.height = canvasSize;
-
   ctx.fillStyle = "#f0f0f0";
   ctx.fillRect(0, 0, canvasSize, canvasSize);
+
+  const bodyNum = getRandomPartNumber(110);
+  const headNum = getRandomPartNumber(36);
+  const eyeNum = getRandomPartNumber(18);
 
   const body = new Image();
   const head = new Image();
   const eye = new Image();
 
-  body.src = getRandomPart("body", 110);
-  head.src = getRandomPart("head", 47);
-  eye.src = getRandomPart("eye", 18);
+  body.src = getPartPath("body", bodyNum);
+  head.src = getPartPath("head", headNum);
+  eye.src = getPartPath("eye", eyeNum);
 
   const name = getRandomName();
   const today = getTodayDateStr();
   const serial = getSerialNumber();
+  const type = getTypeFromBodyNumber(bodyNum);
 
   document.getElementById("characterName").textContent = `Name: ${name}`;
   document.getElementById("generatedDate").textContent = `Date: ${today}`;
@@ -111,29 +101,22 @@ function generatePixelArt() {
       img.src = canvas.toDataURL("image/jpeg", 0.92);
       img.style.display = "block";
 
-      const entry = {
-        image: img.src,
-        name: name,
-        date: today,
-        serial: serial
-      };
+      // 図鑑に保存
       const zukan = JSON.parse(localStorage.getItem("pixelZukan") || "[]");
-      zukan.unshift(entry);
+      zukan.push({
+        name,
+        date: today,
+        serial,
+        type,
+        image: img.src,
+      });
       localStorage.setItem("pixelZukan", JSON.stringify(zukan));
     }
-  };
-
-  const onError = (type, path) => {
-    console.error(`[ERROR] Failed to load ${type}: ${path}`);
   };
 
   body.onload = onLoad;
   head.onload = onLoad;
   eye.onload = onLoad;
-
-  body.onerror = () => onError("body", body.src);
-  head.onerror = () => onError("head", head.src);
-  eye.onerror = () => onError("eye", eye.src);
 }
 
 function copyPostText() {
