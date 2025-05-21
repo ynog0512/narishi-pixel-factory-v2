@@ -89,7 +89,7 @@ function generatePixelArt() {
   ctx.fillRect(0, 0, canvasSize, canvasSize);
 
   const bodyNum = getRandomPartNumber(110);
-  const headNum = getRandomPartNumber(36);
+  const headNum = getRandomPartNumber(65);
   const eyeNum = getRandomPartNumber(18);
 
   const body = new Image();
