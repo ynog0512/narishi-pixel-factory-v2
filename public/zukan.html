@@ -19,26 +19,26 @@
       const container = document.getElementById("zukanContainer");
       container.innerHTML = "";
       const zukan = JSON.parse(localStorage.getItem("pixelZukan") || "[]");
-
+  
       zukan.reverse().forEach(entry => {
         const card = document.createElement("div");
         card.className = "zukan-card";
-
+  
         const img = document.createElement("img");
         img.src = entry.image;
-
+  
         const name = document.createElement("div");
-        name.textContent = `Name: ${entry.name}`;
-
+        name.textContent = entry.name;
+  
         const date = document.createElement("div");
-        date.textContent = `Date: ${entry.date}`;
-
+        date.textContent = entry.date;
+  
         const type = document.createElement("div");
-        type.textContent = `type / ${entry.type}`;
-
+        type.textContent = `type / ${entry.type}`; // ← ラベルあり
+  
         const serial = document.createElement("div");
-        serial.textContent = `Serial: ${entry.serial}`;
-
+        serial.textContent = entry.serial;
+  
         card.appendChild(img);
         card.appendChild(name);
         card.appendChild(date);
@@ -47,7 +47,7 @@
         container.appendChild(card);
       });
     }
-
+  
     window.onload = loadZukan;
   </script>
 </body>
