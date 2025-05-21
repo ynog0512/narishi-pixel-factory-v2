@@ -64,6 +64,7 @@ function getTypeFromBodyNumber(n) {
   if (n >= 57 && n <= 76) return "kanpyo";
   if (n >= 77 && n <= 94) return "carrot";
   if (n >= 95 && n <= 110) return "pumpkin";
+  if (n >= 111 && n <= 127) return "turnip";
   return "unknown";
 }
 
