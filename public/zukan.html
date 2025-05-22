@@ -34,7 +34,8 @@
         date.textContent = entry.date;
   
         const type = document.createElement("div");
-        type.textContent = `type / ${entry.type}`; // ← ラベルあり
+        type.innerHTML = `<span class="label">type /</span><span class="value">${entry.type}</span>`;
+
   
         const serial = document.createElement("div");
         serial.textContent = entry.serial;

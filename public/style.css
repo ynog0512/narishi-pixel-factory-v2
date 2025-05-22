@@ -136,3 +136,14 @@ canvas {
 .zukan-button:hover {
   background-color: #8b5cf6;
 }
+
+.label {
+  font-size: 0.75rem;
+  color: #777;
+  margin-right: 2px;
+}
+
+.value {
+  font-size: 1rem;
+  font-weight: bold;
+}
