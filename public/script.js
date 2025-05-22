@@ -106,11 +106,11 @@ function generatePixelArt() {
   const serial = getSerialNumber();
   const type = getTypeFromBodyNumber(bodyNum);
 
-  document.getElementById("characterName").innerHTML = `<span class="value">${name}</span>`;
-  document.getElementById("generatedDate").innerHTML = `<span class="value">${today}</span>`;
-  document.getElementById("serialNumber").innerHTML = `<span class="value">${serial}</span>`;
+  document.getElementById("characterName").innerHTML = `<span class="label">name /</span><span class="value">${name}</span>`;
+  document.getElementById("generatedDate").innerHTML = `<span class="label">date /</span><span class="value">${today}</span>`;
+  document.getElementById("serialNumber").innerHTML = `<span class="label">serial /</span><span class="value">${serial}</span>`;
   document.getElementById("characterType").innerHTML = `<span class="label">type /</span><span class="value">${type}</span>`;
-  
+
 
   document.getElementById("hashtagBlock").textContent =
     `#🍅今日のピクセル野菜🍅  #ちょこっと農業 #ちょこ農 #ピクセルファーム #しもつけ市の野菜 #ピクセル野菜 #NFT農園  #pixelart #8bit #cutepixelart #nftart #digitalcollectible #indiecreator`;
